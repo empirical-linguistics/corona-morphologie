@@ -1,0 +1,238 @@
+---
+title: 'Corona-Morphologie: Einfache Produktivitätsanalysen an konkreten Beispielen'
+author: "Stefan Hartmann"
+date: "`r Sys.Date()`"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# Morphologische Produktivität live: Ein Blick auf die Bestimmungsglieder
+
+In diesem Abschnitt wollen wir uns nun einen ganz anderen Weg anschauen, auf dem wir uns den Daten nähern können. Hierfür arbeiten wir mit R - falls Sie sich hier einarbeiten wollen, finden Sie online extrem viele gute Tutorials, und es gibt auch viele Einführungen in die Statistik speziell für Linguist*innen, die mit R arbeiten. Hier kann ich nicht in R einführen, versuche aber, das, was ich mache, so verständlich zu beschreiben, dass Sie zumindest das Konzept hinter dem, was ich mache, verstehen können.
+
+Zunächst lade ich einige Zusatzpakete, die ich im Folgenden benutzen möchte. Sie enthalten Funktionen, die in R nicht standardmäßig enthalten sind. Wenn Sie die Pakete noch nicht installiert haben, müssen Sie siejedes einzelne zunächst mit `install.packages("Paketname")` installieren. Das gilt für diejenigen, die über das "Comprehensive R Architecture Network" (CRAN) verfügbar sind. Bei einem der Pakete, "collostructions", ist dies nicht der Fall, Sie finden es unter www.sfla.ch.
+
+```{r preliminaries}
+
+library(tidyverse)
+library(googleVis)
+library(lubridate)
+library(collostructions)
+
+```
+
+
+Zunächst lesen wir die Daten ein, werfen einen Blick auf die Struktur der Daten und schauen uns diese mit Hilfe des `str()`-Befehls genauer an.
+
+```{r readdata}
+
+d <- read_delim("Coronakomposita.txt", delim = "\t",
+                col_names = c("Freq", "word", "date"))
+
+```
+
+```{r head}
+d
+
+```
+
+```{r str}
+
+str(d)
+
+```
+
+Nun löschen wir alle Datenpunkte, in denen "Corona" nicht von mindestens zwei weiteren Zeichen gefolgt wird, um Fehltreffer wie *Corona-* zu tilgen. Dann konvertieren wir alle Daten in Kleinschreibung und fügen eine Spalte hinzu, die nur die Zweitglieder enthält (also alles, was auf *Corona-* folgt). Aus dieser Spalte löschen wir zusätzlich noch alle Interpunktionszeichen, um z.B. Fälle der Kompositaschreibung mit und ohne Bindestrich zu vereinheitlichen.
+
+
+```{r datawrangling}
+
+# Fehltreffer reduzieren
+d <- d[-which(sapply(1:nrow(d), function(i) nchar(d$word[i]))<=8),]
+
+
+# Groß- und Kleinschreibung ignorieren
+d$word <- tolower(d$word)
+
+# Köpfe
+d$head <- gsub("corona-?", "", d$word)
+
+# Interpunktion löschen
+d$head <- gsub("[[:punct:]]", "", d$head)
+
+
+```
+
+
+Wir fassen die Daten nun mit der `summarise`-Funktion aus dem dplyr-Paket (Teil des "Tidyverse") zusammen, um die Gesamtfrequenzen jedes Bestimmungsglieds zu bekommen, und ordnen die Daten absteigend nach Frequenz. Das Ganze speichern wir in einen eigene Dataframe, den wir `corona_tbl` nennen.
+
+```{r summary}
+
+corona_tbl <- d %>% group_by(head) %>% summarise(
+  Freq = sum(Freq)
+) %>% arrange(desc(Freq))
+
+```
+
+
+Wir möchten nun wissen, welche Lexeme überzufällig häufig als Bestimmungsglieder in *Corona-*Komposita auftreten. Dafür brauchen wir zunächst ein Referenzkorpus. Hierfür habe ich eine Frequenzliste aller als Nomen getaggten Tokens aus dem DWDS-Kernkorpus des 21. Jahrhunderts erstellt (wiederum mit Dstar), die wir nun einlesen. Wiederum konvertieren wir alle Daten in Kleinschreibung und zählen die Frequenz entsprechend aus:
+
+
+```{r allnouns}
+
+# einlesen
+nouns <- read_delim("allnouns_dwds21.txt", 
+                    delim = "\t", quote="",
+                    col_names = c("Freq_dwds21", "word"))
+
+# alle in Kleinschreibung
+nouns$word <- tolower(nouns$word)
+
+# neu auszählen (um groß- und kleingeschriebene Varianten zu vereinen)
+nouns <- nouns %>% group_by(word) %>% summarise(
+  Freq_dwds21 = sum(Freq_dwds21)
+)
+
+```
+
+Nun verbinden wir mit Hilfe der `left_join`-Funktion die oben erstellte `corona_tbl`-Tabelle mit der soeben erstellten `nouns`-Tabelle. Da nicht alle Lexeme, die in der Corona-Tabelle belegt sind, auch in der DWDS21-Tabelle belegt sind, gibt es einige fehlende Datenpunkte (in R heißen diese NA, für "Not Available"). Diese ersetzen wir mit Hilfe des `replace_na`-Befehls durch 0.
+
+```{r datawrang2}
+
+corona_tbl <- left_join(corona_tbl, nouns, by = c("head" = "word"))
+corona_tbl <- replace_na(corona_tbl, list(Freq_dwds21 = 0))
+
+```
+
+Mit Hilfe der Funktion `collex.dist` aus dem collostructions-Paket können wir nun eine sog. distinktive Kollexemanalyse über die Daten laufen lassen. Wenn Sie mehr über dieses Verfahren lesen möchten, können Sie z.B. das Paper von Gries & Stefanowitsch (2004) oder den Überblicksartikel zur Kollostruktionsanalyse von Stefanowitsch (2013) lesen. Beachten Sie aber bitte, dass ich dieses Verfahren hier überhaupt nicht im Sinne der Erfinder verwende, sondern lediglich explorativ auf Datensätze anwende. Wenn Sie mehr darüber erfahren möchten, welche text- und diskurslinguistischen Aufschlüsse solche Assoziationsmuster erlauben, empfehle ich Bubenhofer (2009) oder auch viele der Blogeinträge, die über Bubenhofers Website verfügbar sind (https://www.bubenhofer.com/).
+
+Wir führen nun die Kollostruktionsanalyse durch und schauen uns die ersten paar Einträge an, die uns der `head`-Befehl zeigt:
+
+```{r collex}
+
+corona_coll <- collex.dist(as.data.frame(corona_tbl))
+head(corona_coll)
+
+```
+
+Erwartungsgemäß führen *-virus* und *-krise* die Rangliste an. 
+
+Nun wollen wir aber mit diesen Daten noch mehr machen und einen Plot erstellen, in dem wir sowohl die Frequenz als auch die Assoziationsstärke sehen. Dafür ist es sinnvoll, diese Daten zunächst zu transformieren. Gerade bei Frequenzdaten ist es üblich, sie zu logarithmieren, da Wortfrequenzen oft einer sehr schiefen Verteilung folgen, wie wir auch an diesen Daten sehen können:
+
+```{r zipf}
+
+plot(corona_tbl$Freq, type = "b", ylab = "Absolute Frequenz")
+
+```
+
+Einige wenige Tokens sind extremst häufig, viele sehr selten und die allermeisten Hapaxe, haben also eine Frequenz von 1. Anders sieht es aus, wenn wir die Daten logarithmieren:
+
+```{r zipf2}
+
+plot(log(corona_tbl$Freq), type = "b", ylab = "Logarithmierte Frequenz")
+
+```
+
+Die Verteilung ist nun schon deutlich weniger schief. 
+
+
+```{r wrangling3}
+
+# Log-Frequenz hinzufügen
+corona_coll$LogFreq <- log(corona_coll$O.CXN1)
+
+
+```
+
+
+Um die Entstehung neuer Wörter über die Zeit hinweg visualisieren zu können, müssen wir aber zunächst die Assoziationswerte dem ursprünglichen Dataframe, der ja auch die Datumswerte hat, hinzufügen, was wir wieder über den `left_join`-Befehl tun. Anschließend tabulieren wir die Daten so, dass wir für jedes Datum die Frequenz bekommen.
+
+
+
+```{r joinagain}
+
+d <- left_join(d, corona_coll, by = c("head" = "COLLEX"), all.x = T)
+d$LogFreq_per_date <- log(d$Freq)
+
+# tabulieren:
+d2 <- d %>% group_by(head, date) %>% summarise(
+  Freq = sum(Freq),
+  Freq_in_entire_dataset = unique(O.CXN1)
+)
+
+
+```
+
+Um die Datenmenge handhabbar zu halten, beschränken wir uns zudem auf solche Daten, deren absolute Frequenz in den Daten mindestens fünf beträgt und die im Jahr 2020 erhoben wurden. Dafür fügen wir zunächst noch eine Jahr-Spalte an.
+
+
+```{r bubble}
+
+# Jahr-Spalte
+d2$year <- gsub("-.*", "", d2$date)
+
+# nur 2020
+d2 <- filter(d2, year == "2020")
+
+# Frequenz > 5
+d2 <- filter(d2, Freq_in_entire_dataset >= 5)
+
+
+
+```
+
+Um die Daten als Input für Googlevis benutzen zu können, müssen wir sie aber zunächst noch in ein anderes, tabellarisches Format bringen. 
+
+
+```{r gvis}
+
+# tabellarisches Format
+d2_tbl <-  d2 %>% select(head, date) %>% table %>% as.data.frame(stringsAsFactors = F)
+d2_tbl$date <- d2_tbl$date %>% as_date()
+colnames(d2_tbl) <- c("head", "date", "Freq_on_date")
+d2_tbl2 <- left_join(d2_tbl, d2, by = c("head", "date"))
+d2_tbl3 <- replace_na(d2_tbl2, list(Freq = 0, logFreq = 0, diff_rel = 0))
+
+# mit Kollexemtabelle vereinigen
+d2_tbl4 <- left_join(d2_tbl3, corona_coll, by = c("head" = "COLLEX"))
+
+```
+
+Im Falle der hier vorliegenden Daten macht es auch bei den Log-Likelihood-Werten, die in unserer Kollostruktionstabelle als Assoziationsmaß verwendet werden, Sinn, sie zu logarithmieren, weil man sonst in unserer Grafik wenig erkennen würde. Das ist aber wirklich nur in diesem speziellen Fall zwecks Visualisierung sinnvoll und in den meisten Fällen unnötig. Darüber hinaus nehme ich noch eine weitere Veränderung vor: Der Log-Likelihood-Wert geht in zwei Richtungen - einige haben einen hohen LogL-Wert, weil sie überzufällig häufig als Bestimmungsglieder von Komposita im Coronakorpus vorkommen, andere haben einen hohen LogL-Wert, weil sie überzufällig häufig als freie Lexeme im DWDS-Kernkorpus 21 vorkommen! Die ASSOC-Spalte im `collex.dist`-Output gibt an, in welche Richtung die Assoziation jeweils geht. Mit Hilfe dieser Spalte negativiere ich alle Werte, die in Richtung DWDS21 gehen. So können wir dann in unserer Visualisierung auf Anhieb sehen, in welche Richtung die Assoziation geht.
+
+```{r gvis2}
+
+# Frequenz logarithmieren
+d2_tbl4$logFreq <- log(d2_tbl4$Freq_on_date)
+
+# Kollexemstärke logarithmieren
+d2_tbl4$collex <- ifelse(d2_tbl4$ASSOC=="Freq_dwds21", -d2_tbl4$COLL.STR.LOGL, d2_tbl4$COLL.STR.LOGL)
+d2_tbl4$collex2 <- ifelse(d2_tbl4$ASSOC=="Freq_dwds21", -log1p(d2_tbl4$COLL.STR.LOGL), log1p(d2_tbl4$COLL.STR.LOGL))
+
+```
+
+
+
+
+```{r gvis3}
+
+# GoogleMotionChart erstellen...
+bubble <- gvisMotionChart(filter(select(d2_tbl4, head, date, logFreq, COLL.STR.LOGL, collex, collex2), logFreq > 0), 
+                          idvar = "head", 
+                          sizevar = "logFreq",
+                          yvar="logFreq",
+                          xvar="collex2",
+                          timevar = "date")
+
+# ... und mit dem Plot-Befehl aktivieren
+plot(bubble)
+
+
+```
+
+Et voilà - wenn Sie es schaffen, den FlashPlayer zu aktivieren, können Sie jetzt ein wenig mit den Daten herumspielen.
+
+Statt eines Schlussworts eher eine Zwischenbilanz: Ich hoffe, Sie konnten das eine oder andere aus diesem Tutorial lernen, auch wenn es noch work-in-progress ist und gerade diese dritte Seite noch etwas Feinschliff bedürfte. Ich hoffe, dass ich diesen Feinschliff bald ergänzen kann...

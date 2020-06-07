@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1591557129641.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "2F582520",
+    "lastKnownWriteTime" : 1591557148,
+    "last_content_update" : 1591557148513,
+    "path" : "~/Dropbox/Privat/Tutorials/coronamorphologie/02-corona.Rmd",
+    "project_path" : "02-corona.Rmd",
+    "properties" : {
+        "cursorPosition" : "15,146",
+        "scrollLine" : "14"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

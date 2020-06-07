@@ -1,0 +1,30 @@
+Sub highlightwords()
+  Dim rCell As Range
+  Dim lPos As Long, lComp As Long, lLngth As Long
+  Dim sCell As String
+  Dim sTxt As String
+ 
+  Const bCase As Boolean = True  '<- False for Case-Insensitive matching
+  
+  k = Cells(Rows.Count, "A").End(xlUp).Row
+  
+  Application.ScreenUpdating = False
+  lComp = 1 + bCase
+  Columns("C").Font.ColorIndex = 1
+  For Counter = 1 To k
+  Set curCell1 = Worksheets("Sheet1").Cells(Counter, 5)
+  Set curCell2 = Worksheets("Sheet1").Cells(Counter, 8)
+  sTxt = curCell1.Value
+  lLngth = Len(sTxt)
+  With curCell2
+    .Font.ColorIndex = 1
+    sCell = .Text
+    lPos = InStr(1, sCell, sTxt, lComp)
+      Do Until lPos = 0
+        .Characters(lPos, lLngth).Font.ColorIndex = 5
+        lPos = InStr(lPos + lLngth, sCell, sTxt, lComp)
+      Loop
+    End With
+    Next Counter
+  Application.ScreenUpdating = True
+End Sub

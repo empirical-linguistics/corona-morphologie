@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1591557127990.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1314100696",
+    "id" : "1E0357E1",
+    "lastKnownWriteTime" : 1591546153,
+    "last_content_update" : 1591546153,
+    "path" : "~/Dropbox/Privat/Tutorials/coronamorphologie/01-einleitung.Rmd",
+    "project_path" : "01-einleitung.Rmd",
+    "properties" : {
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
