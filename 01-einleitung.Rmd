@@ -4,11 +4,6 @@ author: "Stefan Hartmann"
 date: "`r Sys.Date()`"
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-
 # Produktivitätsmaße
 
 Um die Produktivität sprachlicher Muster zu messen, bedient man sich i.d.R. dreier Größen, die auch in anderen Bereichen relevant sind. Für die gängigen Produktivitätsmaße benötigt man nämlich

@@ -4,11 +4,6 @@ author: "Stefan Hartmann"
 date: "`r Sys.Date()`"
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-
 # Corona- als Erstglied: Eine Produktivitätsanalyse
 
 Als Beispiel sehen wir uns Komposita mit dem Erstglied *Corona-* an. Hier kann man zwar streiten, ob es sich um ein eigenes Wortbildungsmuster handelt oder ob wir es einfach mit Instanzen der allgemeineren N+N-Komposition zu tun haben, allerdings lässt sich durchaus argumentieren, dass *Corona*-Komposita in letzter Zeit so häufig geworden sind, dass man [*Corona*+X] als eigenständiges Kompositionsmuster annehmen kann. Dabei kann es nicht nur aus morphologischer, sondern auch aus sozio- und diskurslinguistischer Sicht interessant sein, einen Blick darauf zu werfen, mit welchen Bestimmungsgliedern sich das Erstglied *Corona-* verbindet.
@@ -21,7 +16,7 @@ Mit folgender Suchanfrage lasse ich mir alle Instanzen auszählen, bei denen auf
 knitr::include_graphics("docs/fig/dstarcorona.png", dpi = 450)
 ```
 
-Wie \@ref(fig:dstarcorona) zeigt, habe ich als Exportoption "Text" gewählt, sodass wir die Daten im Rohtextformat erhalten, und die Seitengröße ("Page size") so weit erhöht, dass auf jeden Fall alle Types ausgegeben werden (der Default wäre hier bei weitem nicht ausreichend). So erhalten wir eine Tabelle mit einzelnen Types und deren jeweiliger Frequenz. Mit dieser arbeiten wir nun weiter.
+Wie \@ref(fig:dstarcorona) zeigt, habe ich als Exportoption "Text" gewählt, sodass wir die Daten im Rohtextformat erhalten, und die Seitengröße ("Page size") so weit erhöht, dass auf jeden Fall alle Types ausgegeben werden (der Default wäre hier bei weitem nicht ausreichend). So erhalten wir eine Tabelle mit einzelnen Types und deren jeweiliger Frequenz. Mit dieser arbeiten wir nun weiter. Die Tabelle können Sie, wenn Sie sich nicht bei DWDS anmelden und die Recherche selbst durchführen wollen, auch ganz einach [hier](https://raw.githubusercontent.com/empirical-linguistics/corona-morphologie/master/Coronakomposita.txt) herunterladen.
 
 
 ## Produktivitätsanalyse in Excel {-}
