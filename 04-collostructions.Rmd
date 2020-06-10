@@ -11,8 +11,7 @@ Wir möchten nun zusätzlich wissen, welche Lexeme überzufällig häufig als Be
 
 ```{r allnouns, message = F}
 
-# einlesen
-library(tidyverse)
+# Daten einlesen
 nouns <- read_delim("allnouns_dwds21.txt", 
                     delim = "\t", quote="",
                     col_names = c("Freq_dwds21", "word"))
@@ -36,7 +35,7 @@ corona_tbl <- replace_na(corona_tbl, list(Freq_dwds21 = 0))
 
 ```
 
-Mit Hilfe der Funktion `collex.dist` aus dem "collostructions"-Paket können wir nun eine sog. distinktive Kollexemanalyse über die Daten laufen lassen. Wenn Sie mehr über dieses Verfahren lesen möchten, können Sie z.B. das Paper von Gries & Stefanowitsch (2004) oder den Überblicksartikel zur Kollostruktionsanalyse von Stefanowitsch (2013) lesen. Empfehlenswert sind auch die Einführungsvideos von Susanne Flach (sfla.ch), wo Sie auch eine Einführung in das gleichnamige R-Paket finden. Beachten Sie aber bitte, dass ich dieses Verfahren hier überhaupt nicht im Sinne der Erfinder verwende, sondern lediglich explorativ auf Datensätze anwende. Deshalb vermeide ich im Folgenden auch Termini wie "Kollostruktionsanalyse" oder "Kollexemanalyse", sondern spreche allgemein von "Assoziationsmustern". Die Kollostruktionsanalyse habe ich nur erwähnt, weil das besagte Paket eine praktische Möglichkeit bietet, auf einfachste Weise Assoziationsmuster zu errechnen, und der Name des Pakets andernfalls für Uneingeweihte etwas kryptisch bleiben würde. - Wenn Sie mehr darüber erfahren möchten, welche text- und diskurslinguistischen Aufschlüsse Assoziationsmuster im Allgemeinen erlauben, empfehle ich Bubenhofer (2009) oder auch viele der Blogeinträge, die über Bubenhofers Website verfügbar sind (https://www.bubenhofer.com/). 
+Mit Hilfe der Funktion `collex.dist` aus dem "collostructions"-Paket (Flach 2017) können wir nun eine sog. distinktive Kollexemanalyse über die Daten laufen lassen. Wenn Sie mehr über dieses Verfahren lesen möchten, können Sie z.B. das Paper von Gries & Stefanowitsch (2004) oder den Überblicksartikel zur Kollostruktionsanalyse von Stefanowitsch (2013) lesen. Empfehlenswert sind auch die Einführungsvideos von Susanne Flach (sfla.ch), wo Sie auch eine Einführung in das gleichnamige R-Paket finden. Beachten Sie aber bitte, dass ich dieses Verfahren hier überhaupt nicht im Sinne der Erfinder verwende, sondern lediglich explorativ auf Datensätze anwende. Deshalb vermeide ich im Folgenden auch Termini wie "Kollostruktionsanalyse" oder "Kollexemanalyse", sondern spreche allgemein von "Assoziationsmustern". Die Kollostruktionsanalyse habe ich nur erwähnt, weil das besagte Paket eine praktische Möglichkeit bietet, auf einfachste Weise Assoziationsmuster zu errechnen, und der Name des Pakets andernfalls für Uneingeweihte etwas kryptisch bleiben würde. - Wenn Sie mehr darüber erfahren möchten, welche text- und diskurslinguistischen Aufschlüsse Assoziationsmuster im Allgemeinen erlauben, empfehle ich Bubenhofer (2009) oder auch viele der Blogeinträge, die über Bubenhofers Website verfügbar sind (https://www.bubenhofer.com/). 
 
 Wir führen nun die Kollostruktionsanalyse durch und schauen uns die ersten paar Einträge an, die uns der `head`-Befehl zeigt:
 
