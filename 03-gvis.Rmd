@@ -8,7 +8,7 @@ date: "`r Sys.Date()`"
 
 In diesem Abschnitt wollen wir uns nun einen anderen Weg anschauen, auf dem wir uns den Daten nähern können. Hierfür arbeiten wir mit R - falls Sie sich hier einarbeiten wollen, finden Sie online extrem viele gute Tutorials, und es gibt auch viele Einführungen in die Statistik speziell für Linguist*innen, die mit R arbeiten. Hier kann ich nicht in R einführen, versuche aber, das, was ich mache, so verständlich zu beschreiben, dass Sie zumindest das Konzept hinter dem, was ich mache, verstehen können.
 
-Zunächst lade ich einige Zusatzpakete, die ich im Folgenden benutzen möchte. Sie enthalten Funktionen, die in R nicht standardmäßig enthalten sind. Wenn Sie die Pakete noch nicht installiert haben, müssen Sie siejedes einzelne zunächst mit `install.packages("Paketname")` installieren. Das gilt für diejenigen, die über das "Comprehensive R Architecture Network" (CRAN) verfügbar sind. Bei einem der Pakete, "collostructions", ist dies nicht der Fall, Sie finden es unter www.sfla.ch.
+Zunächst lade ich einige Zusatzpakete, die ich im Folgenden benutzen möchte. Sie enthalten Funktionen, die in R nicht standardmäßig enthalten sind. Wenn Sie die Pakete noch nicht installiert haben, müssen Sie jedes einzelne zunächst mit `install.packages("Paketname")` installieren. Das gilt für diejenigen, die über das "Comprehensive R Architecture Network" (CRAN) verfügbar sind. Bei einem der Pakete, "collostructions", ist dies nicht der Fall, Sie finden es unter www.sfla.ch.
 
 ```{r preliminaries, message = FALSE}
 

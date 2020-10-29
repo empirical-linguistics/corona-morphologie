@@ -16,7 +16,7 @@ Mit folgender Suchanfrage lasse ich mir alle Instanzen auszählen, bei denen auf
 knitr::include_graphics("docs/fig/dstarcorona.png", dpi = 450)
 ```
 
-Wie \@ref(fig:dstarcorona) zeigt, habe ich als Exportoption "Text" gewählt, sodass wir die Daten im Rohtextformat erhalten, und die Seitengröße ("Page size") so weit erhöht, dass auf jeden Fall alle Types ausgegeben werden (der Default wäre hier bei weitem nicht ausreichend). So erhalten wir eine Tabelle mit einzelnen Types und deren jeweiliger Frequenz. Mit dieser arbeiten wir nun weiter. Die Tabelle können Sie, wenn Sie sich nicht bei DWDS anmelden und die Recherche selbst durchführen wollen, auch ganz einach [hier](https://raw.githubusercontent.com/empirical-linguistics/corona-morphologie/master/Coronakomposita.txt) herunterladen.
+Wie \@ref(fig:dstarcorona) zeigt, habe ich als Exportoption "Text" gewählt, sodass wir die Daten im Rohtextformat erhalten, und die Seitengröße ("Page size") so weit erhöht, dass auf jeden Fall alle Types ausgegeben werden (der Default wäre hier bei weitem nicht ausreichend). So erhalten wir eine Tabelle mit einzelnen Types und deren jeweiliger Frequenz. Mit dieser arbeiten wir nun weiter. Die Tabelle können Sie, wenn Sie sich nicht bei DWDS anmelden und die Recherche selbst durchführen wollen, auch ganz einfach [hier](https://raw.githubusercontent.com/empirical-linguistics/corona-morphologie/master/Coronakomposita.txt) herunterladen.
 
 
 ## Produktivitätsanalyse in Excel {-}

@@ -1,9 +1,9 @@
 {
-    "path" : "~/Dropbox/Privat/Tutorials/coronamorphologie",
-    "sortOrder" : [
+    "path": "~/sciebo/Tutorials/coronamorphologie",
+    "sortOrder": [
         {
-            "ascending" : true,
-            "columnIndex" : 2
+            "columnIndex": 2,
+            "ascending": true
         }
     ]
 }

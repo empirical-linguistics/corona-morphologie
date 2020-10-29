@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Corona-Morphologie: Einfache Produktivitätsanalysen an konkreten Beispielen</title>
-  <meta name="description" content="Corona-Morphologie: Einfache Produktivitätsanalysen an konkreten Beispielen" />
+  <title>2 Produktivitätsmaße | Corona-Morphologie: Einfache Produktivitätsanalysen an konkreten Beispielen</title>
+  <meta name="description" content="2 Produktivitätsmaße | Corona-Morphologie: Einfache Produktivitätsanalysen an konkreten Beispielen" />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Corona-Morphologie: Einfache Produktivitätsanalysen an konkreten Beispielen" />
+  <meta property="og:title" content="2 Produktivitätsmaße | Corona-Morphologie: Einfache Produktivitätsanalysen an konkreten Beispielen" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Corona-Morphologie: Einfache Produktivitätsanalysen an konkreten Beispielen" />
+  <meta name="twitter:title" content="2 Produktivitätsmaße | Corona-Morphologie: Einfache Produktivitätsanalysen an konkreten Beispielen" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="produktivitätsmaße.html"/>
+<link rel="prev" href="index.html"/>
+<link rel="next" href="corona-als-erstglied-eine-produktivitätsanalyse.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -155,16 +155,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Corona-Morphologie: Einfache Produktivitätsanalysen an konkreten Beispielen</h1>
-<p class="author"><em>Stefan Hartmann</em></p>
-<p class="date"><em>2020-10-28</em></p>
+<div id="produktivitätsmaße" class="section level1">
+<h1><span class="header-section-number">2</span> Produktivitätsmaße</h1>
+<p>Um die Produktivität sprachlicher Muster zu messen, bedient man sich i.d.R. dreier Größen, die auch in anderen Bereichen relevant sind. Für die gängigen Produktivitätsmaße benötigt man nämlich</p>
+<ul>
+<li>die Anzahl der Tokens</li>
+<li>die Anzahl der Types</li>
+<li>die Anzahl der Hapax Legomena.</li>
+</ul>
+<p>Was hat es damit auf sich?</p>
+<ul>
+<li><strong>Tokens</strong> bezieht sich die Gesamtzahl der Wörter, die zu einem Wortbildungsmuster gehören. Angenommen, wir interessieren uns für Derivate auf <em>-heit</em> und <em>-keit</em> wie <em>Freiheit</em> und <em>Ehrlichkeit</em> und finden in einem winzig kleinen Korpus die Belege <em>Freiheit</em>, <em>Freiheit</em>, <em>Freiheit</em>, <em>Ehrlichkeit</em>, <em>Faulheit</em> und nochmal <em>Faulheit</em>, dann sind das insgesamt sechs Tokens, also sechs Vorkommnisse.</li>
+<li><strong>Types</strong> bezeichnet die Anzahl der unterschiedlichen Instanzen eines Wortbildungsmusters. Im eben genannten Beispiel wären dies die drei Lexeme <em>Freiheit</em>, <em>Ehrlichkeit</em> und <em>Faulheit</em>.</li>
+<li><strong>Hapax Legomena</strong> bezeichnet diejenigen Instanzen, die genau ein einziges Mal belegt sind. In unserem Beispiel wäre das <em>Ehrlichkeit</em>. Hapax Legomena, oder kurz Hapaxe, sind deshalb interessant, weil sie häufig als Index für Neubildungen gesehen werden: Zwar ist nicht davon auszugehen, dass jedes Wortbildungsprodukt, das nur einmal in einem Korpus belegt ist, eine ad-hoc-Bildung ist, denn auch eigentlich relativ häufige Wörter können in einem Korpus durch Zufall unterrepräsentiert sein. Man geht aber dennoch davon aus, dass es eine Korrelation zwischen Neubildungen und Hapaxen gibt, sodass Hapaxe als ungefährer Richtwert für die Zahl an Neubildungen gesehen werden können (die sich ja nicht messen lässt).</li>
+</ul>
+<p>An einem nicht-linguistischen Beispiel (das eine Idee von Susanne Flach aufgreift) illustriert <a href="produktivitätsmaße.html#fig:typestokens">2.1</a> diese drei Konzepte. Gerade die Unterscheidung von Types und Tokens ist anhand solcher nicht-linguistischer Beispiele oft besser nachzuvollziehen. Zugleich zeigen solche Beispiele, dass das Konzept von Types immer von der Abstraktionsebene abhängt, auf der man sich gerade bewegt: Wenn es uns um die unterschiedlichen Arten von Cocktails geht, dann sehen wir dort drei Types - wenn es uns um die unterschiedlichen Arten von Getränken geht (“Cocktail” vs. “Bier” vs. “Limonade” etc.), dann sehen wir nur einen Type - nämlich Cocktails! Dementsprechend kann man auch bei der Arbeit mit linguistischen Daten Types oft auf unterschiedliche Art und Weise bestimmen (z.B. rein graphematisch, unter Zuhilfenahme von Grundformen [Lemmas] usw.).</p>
+<div class="figure"><span id="fig:typestokens"></span>
+<img src="docs/fig/typestokenshapaxe.png" alt="Types und Tokens" width="200%" />
+<p class="caption">
+Fig. 2.1: Types und Tokens
+</p>
 </div>
-<div id="einführung" class="section level1">
-<h1><span class="header-section-number">1</span> Einführung</h1>
-<p>Eine zentrale Frage insbesondere in der Wortbildungsforschung, aber auch in anderen Bereichen wie etwa der Syntax, lautet, in welchem Maße ein konkretes Muster in der Lage ist, Neubildungen hervorzubringen. Beispielsweise bringt das Suffix <em>-icht</em> (<em>Dickicht, Kehricht</em>) synchron gar keine Neubildungen mehr hervor, während etwa <em>-mäßig</em> relativ viele Neubildungen wie etwa <em>rezomäßig</em> hervorbringt.</p>
-<p>In diesem Tutorial kann ich zwar nicht auf komplexere Aspekte der Produktivitätsmessung eingehen, möchte aber zumindest einen groben Überblick über verbreitete Maße der morphologischen Produktivität geben und anhand eines konkreten Beispiels zeigen, wie sie sich operationalisieren lassen. Anschließend zeige ich noch, wie man mit Hilfe moderner Visualisierungsverfahren die Entstehung neuer Wörter quasi in Echtzeit verfolgen kann.</p>
-<p>Wenn Sie die konkreten Anwendungsbeispiele selbst ausprobieren möchten, brauchen Sie für Kapitel 2 und 3 nur Excel oder ein anderes Tabellenkalkulationsprogramm wie LibreOffice Calc. Das vierte und fünfte Kapitel verwendet <a href="https://r-project.org">R</a> und ist vermutlich eher für Fortgeschrittene interessant, die sich schon ein wenig mit R oder einer anderen Programmiersprache wie z.B. Python auskennen - alle anderen können versuchen, den konzeptionellen Ausführungen zu folgen, und/oder sich einfach die bunten Grafiken anschauen…</p>
+<p>Mit Hilfe dieser drei Maße können wir uns nun den Produktivitätsmaßen annähern, die Baayen (u.a. 1993, 2009) in den 90er-Jahren vorgeschlagen hat und die seitdem immer wieder angewandt, aber auch kontrovers diskutiert wurden, da jedes dieser Maße nur einen Teilaspekt der morphologischen Produktivität erfassen kann und die Maße teilweise auch zu Fehlinterpretationen einladen, wenn man sich nicht ihrer Grenzen bewusst ist.</p>
+<ul>
+<li><p>Die <em>realisierte Produktivität</em> ist schlicht die Typefrequenz, die i.d.R. normalisiert berichtet wird, indem man die Anzahl der Tokens durch die Anzahl der Types teilt.</p></li>
+<li><p>Das wohl am häufigsten verwendete Maß ist die <em>potentielle Produktivität</em>. Sie ist der Quotient aus der Anzahl der Hapax Legomena, die zu einem Wortbildungsmuster gehören, und der Anzahl der Tokens im Korpus insgesamt. Dieses Maß wurde beispielsweise verwendet, um die Produktivität unterschiedlicher Wortbildungsmuster synchron zu vergleichen (Baayen &amp; Lieber 1991) oder um die Produktivität desselben Wortbildungsmusters in unterschiedlichen Zeitspannen zu vergleichen (Scherer 2006, Hartmann 2016). Dabei ist jedoch zu bedenken, dass der Wert der potentiellen Produktivität von der Korpusgröße und auch von der Tokenfrequenz abhängt (vgl. z.B. Gaeta &amp; Ricca 2006). Produktivitätswerte, die auf Grundlage unterschiedlich großer (Teil-)Korpora gewonnen wurden oder bei denen sich die Tokenfrequenz des Wortbildungsmusters zwischen den beiden (Teil-)Korpora unterscheiden, sind daher nicht unmittelbar vergleichbar - ein Problem, das leider oft nicht berücksichtigt wird (und das auch ich lange unterschätzt habe, vgl. Hartmann 2016; erst in Hartmann 2018 habe ich dem Rechnung getragen).</p></li>
+<li><p>Die <em>expandierende Produktivität</em> schließlich versucht zu messen, wie stark ein Wortbildungsmuster zum Wachstum des Wortschatzes einer Sprache beiträgt, indem sie die Anzahl der Hapaxe, die zum Wortbildungsmuster gehören, durch die Anzahl aller Hapaxe im Korpus teilt.</p></li>
+</ul>
+<p>Im Folgenden werden wir uns nur mit den ersten beiden Maßen auseinandersetzen und sie an einem konkreten Beispiel errechnen.</p>
 
 </div>
             </section>
@@ -172,8 +190,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-
-<a href="produktivitätsmaße.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="corona-als-erstglied-eine-produktivitätsanalyse.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

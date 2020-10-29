@@ -1,0 +1,7 @@
+Suchanfragen:
+------------
+
+count($p=ADJ*=1 $w=Lockdown) #by[$l=1, date]
+count($p=ADJ*=1 $w=Shutdown) #by[$l=1, date]
+count($w=Lockdown) #by[date]
+count($w=Shutdown) #by[date]
